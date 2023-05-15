@@ -1,4 +1,22 @@
 const Header = (title, date, temp) => {
+  const dheader = document.createElement('div')
+  const sdate = document.createElement('span')
+  const htitle = document.createElement('h1')
+  const stemp = document.createElement('span')
+
+  dheader.classList.add('header')
+  sdate.classList.add('date')
+  stemp.classList.add('temp')
+
+  dheader.appendChild(sdate)
+  dheader.appendChild(htitle)
+  dheader.appendChild(stemp)
+
+  sdate.textContent = date
+  htitle.textContent = title
+  stemp.textContent = temp
+
+  return dheader
   // TASK 1
   // ---------------------
   // Implement this function taking `title`, `date` and `temp` as its 3 args and returning the markup below.
@@ -14,6 +32,8 @@ const Header = (title, date, temp) => {
 }
 
 const headerAppender = (selector) => {
+  const entry = document.querySelector(selector)
+  entry.appendChild(Header('title', 'date', 'temp'))
   // TASK 2
   // ---------------------
   // Implement this function taking a css selector as its only argument.

@@ -1,4 +1,34 @@
 const Card = (article) => {
+  const dcard = document.createElement('div')
+  const dheadline =document.createElement('div')
+  const dauthor = document.createElement('div')
+  const dimg = document.createElement('div')
+  const img = document.createElement('img')
+  const sby = document.createElement('span')
+
+  dcard.appendChild(dheadline)
+  dcard.appendChild(dauthor)
+  dauthor.appendChild(dimg)
+  dimg.appendChild(img)
+  dauthor.appendChild(sby)
+
+  dcard.classList.add('card')
+  dheadline.classList.add('headline')
+  dauthor.classList.add('author')
+  dimg.classList.add('img-container')
+
+  dheadline.textContent = `${article.headline}`
+  img.src = article.authorPhoto
+  sby.textContent = `By ${article.authorName}`
+
+  dcard.addEventListener('click', () => {
+    console.log(dheadline)
+  })
+
+  return dcard
+
+
+
   // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
@@ -19,7 +49,31 @@ const Card = (article) => {
   //
 }
 
+import axios from 'axios'
+
 const cardAppender = (selector) => {
+  const entry = document.querySelector(selector)
+  axios.get(`http://localhost:5001/api/articles`)
+  .then( res => {
+    console.log(res)
+    
+    res.data.articles.bootstrap.forEach( article => {
+      entry.appendChild(Card(article))
+    })
+    res.data.articles.javascript.forEach( article => {
+      entry.appendChild(Card(article))
+    })
+    res.data.articles.jquery.forEach( article => {
+      entry.appendChild(Card(article))
+    })
+    res.data.articles.node.forEach( article => {
+      entry.appendChild(Card(article))
+    })
+    res.data.articles.technology.forEach( article => {
+      entry.appendChild(Card(article))
+    })  
+  })
+  
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
